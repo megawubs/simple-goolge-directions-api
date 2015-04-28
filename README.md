@@ -1,32 +1,42 @@
-Laravel Postcode API
+Simple Goolge Directions API
 ==========
-This is a simple laravel package to use the dutch postcode api. 
+This is a simple laravel package to get basic information from the Google Directions API. 
 
 ## Installation
 
 To install this library into your project simply do the following in your project root:
 
 ```bash
-composer require wubs/zip:1.1.*
+composer require wubs/simple-google-directions-api:0.*
 ```
 
 ### Laravel specific
 
-If you use Laravel, add `'Wubs\Zip\ZipServiceProvider',` to `app/config.php` in the providers array and add `'Zip' => 
-'Wubs\Zip\Facades\Zip',` to the aliases array, also in `app/config.php`.
+If you use Laravel, add `'Wubs\Directions\DirectionsServiceProvider',` to `app/config.php` in the providers array and 
+add 
+`'Directions' => 'Wubs\Directions\Facades\Directions',` to the aliases array, also in `app/config.php`.
 
 ## Usage
 
 You can use the facade like this:
 ```PHP
 <?php
-Zip::address("1234AA", 11);
+$options = new DirectionOptions(
+            DirectionOption::origin($address1->latitude, $address1->longitude),
+            DirectionOption::destination($address2->latitude, $address2->longitude),
+            DirectionOption::mode(TravelModes::BICYCLING),
+            DirectionOption::alternatives(true),
+            DirectionOption::language("nl_NL"),
+            DirectionOption::departureTime(Carbon::now())
+        );
+$routes = Directions::route($options);
+
 ```
 
 Or get it from the IoC container like so:
 ```PHP
 <?php
-$api = $app->make('\Wubs\Zip\ZipApi')
+$api = $app->make('\Wubs\Directions\Directions')
 ```
 
 Or inject it into a constructor
@@ -34,15 +44,15 @@ Or inject it into a constructor
 ```PHP
 <?php namespace App\Http\Controllers;
 
-use Wubs\Zip\ZipApi;
+use Wubs\Directions\Directions;
 
 class ZipController extends Controller
 {
    private $api;
    
-    public function __construct(ZipApi $api)
+    public function __construct(Directions $directions)
     {
-        $this->api = $api;
+        $this->directions = $directions;
         
     }
 }
@@ -53,7 +63,7 @@ Publish the configuration by running:
 php artisan vendor:publish
 ```
 
-Afterwards the configuration will be located in config/zip.php
+Afterwards the configuration will be located in config/directions.php
 
 I highly recommend using the .env file.
 
@@ -66,10 +76,24 @@ The package is also usable without Laravel. See the code below.
 <?php
 require 'vendor/autoload.php'
 
-use Wubs\Zip\ZipApi;
+use Wubs\Directions\Directions;
 
-$zipApi = new ZipApi("API_KEY");
-$address = $postcodeApi->address("1234AA", 11);
+$directions = new Directions(getenv("GOOGLE_DIRECTIONS_SERVER_KEY"));
+
+$zipApi = new Wubs\Zip\ZipApi(getenv("ZIP_API_KEY"));
+$address1 = $zipApi->address("8316PB", 28);
+$address2 = $zipApi->address("6821HX", 1);
+
+$options = new DirectionOptions(
+    DirectionOption::origin($address1->latitude, $address1->longitude),
+    DirectionOption::destination($address2->latitude, $address2->longitude),
+    DirectionOption::mode(TravelModes::BICYCLING),
+    DirectionOption::alternatives(true),
+    DirectionOption::language("nl_NL"),
+    DirectionOption::departureTime(Carbon::now())
+);
+
+$response = $directions->route($options);
 ```
 
 

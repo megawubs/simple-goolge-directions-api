@@ -1,5 +1,5 @@
 {
-  "name": "wubs/google-directions-api",
+  "name": "wubs/simple-google-directions-api",
   "type": "library",
   "description": "Communicates with the postcodeapi.nu api",
   "keywords": [

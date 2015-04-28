@@ -4,10 +4,10 @@
 return [
     /* 
     |--------------------------------------------------------------------------
-    | postocdeapi api key
+    | Google Server api key
     |--------------------------------------------------------------------------
-    | Place your postcode api key here, or get it from your .env file. Provide
-    | a key when you do not use the .env environment file.
+    | Place your Google Server Directions API key here, or get it from your .env file. Provide
+    | the key as second parameter when you do not use the .env environment file.
     | 
     |
     */
