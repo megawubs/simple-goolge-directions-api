@@ -1,0 +1,35 @@
+{
+  "name": "wubs/google-directions-api",
+  "type": "library",
+  "description": "Communicates with the postcodeapi.nu api",
+  "keywords": [
+    "google",
+    "directions",
+    "api",
+    "wrapper"
+  ],
+  "authors": [
+    {
+      "name": "Bram Wubs",
+      "email": "bram.wubs@gmail.com",
+      "homepage": "http://blog.wubsinfo.nl"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "guzzlehttp/guzzle": "5.2.0",
+    "illuminate/support": "5.0.x",
+    "google/apiclient": "1.0.*@beta",
+    "nesbot/carbon": "~1.18"
+  },
+  "require-dev": {
+    "vlucas/phpdotenv": "2.x-dev",
+    "phpunit/phpunit": "~4.0",
+    "wubs/postcode-api": "~1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Wubs\\": "src/"
+    }
+  }
+}
