@@ -39,7 +39,7 @@ class Directions
         );
 
         $response = $this->client->send($request);
-        return new DirectionResponse($response->json(['object' => true]));
+        return new DirectionResponse($response->json(['object' => true]), $options->get("mode"));
     }
 
 

@@ -7,21 +7,25 @@ class Route
 
     public $duration;
 
+    public $travelMode;
+
     /**
      * @param $distance
      * @param $duration
+     * @param $mode
      */
-    private function __construct($distance, $duration)
+    private function __construct($distance, $duration, $mode)
     {
         $this->distance = $distance;
         $this->duration = $duration;
+        $this->travelMode = $mode;
     }
 
-    public static function fromObject($json)
+    public static function fromObject($json, $mode)
     {
         $leg = $json->legs[0];
 
-        return new static($leg->distance, $leg->duration);
+        return new static($leg->distance, $leg->duration, $mode);
     }
 
 }

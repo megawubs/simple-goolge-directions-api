@@ -56,7 +56,7 @@ class HowItShouldWorkTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Wubs\Directions\Response\DirectionResponse', $response);
         foreach ($response->routes as $route) {
             $this->assertInstanceOf('Wubs\Directions\Response\Route', $route);
-
+            $this->assertEquals(TravelModes::BICYCLING, $route->travelMode);
         }
 
     }
