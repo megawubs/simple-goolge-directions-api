@@ -9,12 +9,20 @@ class DirectionResponse
      */
     public $routes;
 
+    public $travelMode;
+
+    /**
+     * @param $response
+     * @param $travelMode
+     */
     public function __construct($response, $travelMode)
     {
         $this->routes = new Collection();
+        $this->travelMode = $travelMode;
 
         foreach ($response->routes as $route) {
-            $this->routes->push(Route::fromObject($route, $travelMode));
+            $this->routes->push(Route::fromObject($route));
         }
+
     }
 }
