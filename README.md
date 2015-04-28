@@ -46,7 +46,7 @@ Or inject it into a constructor
 
 use Wubs\Directions\Directions;
 
-class ZipController extends Controller
+class DirectionsController extends Controller
 {
    private $api;
    
