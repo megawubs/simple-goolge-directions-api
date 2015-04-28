@@ -11,7 +11,6 @@ class DirectionResponse
 
     public function __construct($response, $travelMode)
     {
-        write($response, "full-response");
         $this->routes = new Collection();
 
         foreach ($response->routes as $route) {
